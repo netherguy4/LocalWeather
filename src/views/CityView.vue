@@ -6,14 +6,24 @@ const CityWeather = defineAsyncComponent(() => import('@/components/Weather/City
 </script>
 
 <template>
-  <suspense>
-    <template #default>
-      <CityWeather />
-    </template>
-    <template #fallback>
-      <CityWeatherSkeleton />
-    </template>
-  </suspense>
+  <div class="view">
+    <suspense>
+      <template #default>
+        <CityWeather />
+      </template>
+      <template #fallback>
+        <CityWeatherSkeleton />
+      </template>
+    </suspense>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.view {
+  position: absolute;
+  top: 1.5em;
+  left: 1.5em;
+  right: 1.5em;
+  bottom: 1.5em;
+}
+</style>

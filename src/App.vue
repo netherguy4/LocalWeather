@@ -1,13 +1,22 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue'
+import 'animate.css'
 </script>
 
 <template>
   <div class="wrapper">
     <AppHeader />
     <main class="wrapper__main">
-      <div class="container wrapper__container">
-        <RouterView />
+      <div class="container">
+        <router-view v-slot="{ Component, route }">
+          <transition
+            mode="outIn"
+            :enter-active-class="route.meta.enterClass"
+            :leave-active-class="route.meta.leaveClass"
+          >
+            <Component :is="Component" />
+          </transition>
+        </router-view>
       </div>
     </main>
   </div>
@@ -19,15 +28,16 @@ import AppHeader from './components/AppHeader.vue'
   flex-direction: column;
   min-height: 100vh;
   &__main {
+    overflow-x: hidden;
     flex: 1 1 auto;
-  }
-  &__container {
-    padding: 1.5em;
   }
 }
 </style>
 
 <style lang="scss">
+:root {
+  --animate-duration: 300ms;
+}
 #app {
   background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
   min-height: 100vh;
@@ -37,6 +47,7 @@ import AppHeader from './components/AppHeader.vue'
 .container {
   max-width: torem(1024);
   margin: 0 auto;
+  position: relative;
 }
 .Vue-Toastification__toast.my-toast {
   backdrop-filter: blur(3px);

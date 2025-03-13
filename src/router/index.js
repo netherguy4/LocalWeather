@@ -12,16 +12,27 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        title: 'Home',
+        enterClass: 'animate__animated animate__fadeIn',
+        leaveClass: 'animate__animated animate__fadeOut',
+      },
     },
     {
       path: '/weather/:city',
       name: 'weather',
       component: CityView,
+      meta: {
+        title: 'Weather',
+        enterClass: 'animate__animated animate__fadeIn',
+        leaveClass: 'animate__animated animate__fadeOut',
+      },
     },
   ],
 })
 
-router.afterEach((to) => {
+router.beforeEach((to) => {
+  to.meta.title ? (document.title = `${to.meta.title} | The Local Weather`) : null
   if (to.name === 'home') {
     useAnimation().hideButton()
   } else if (useAddedCities().isAdded !== true) {

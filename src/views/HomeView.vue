@@ -16,5 +16,10 @@ const CitiesList = defineAsyncComponent(() => import('@/components/Home/CitiesLi
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+  position: absolute;
+  top: 1.5em;
+  left: 1.5em;
+  right: 1.5em;
+  bottom: 1.5em;
 }
 </style>
