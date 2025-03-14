@@ -6,24 +6,19 @@ const CityWeather = defineAsyncComponent(() => import('@/components/Weather/City
 </script>
 
 <template>
-  <div class="view">
-    <suspense>
-      <template #default>
-        <CityWeather />
-      </template>
-      <template #fallback>
-        <CityWeatherSkeleton />
-      </template>
-    </suspense>
+  <div class="container">
+    <transition
+      enter-active-class="animate__animated animate__fadeIn weather-enter-leave"
+      leave-active-class="animate__animated animate__fadeOut weather-enter-leave"
+    >
+      <suspense>
+        <template #default>
+          <CityWeather />
+        </template>
+        <template #fallback>
+          <CityWeatherSkeleton />
+        </template>
+      </suspense>
+    </transition>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.view {
-  position: absolute;
-  top: 1.5em;
-  left: 1.5em;
-  right: 1.5em;
-  bottom: 1.5em;
-}
-</style>

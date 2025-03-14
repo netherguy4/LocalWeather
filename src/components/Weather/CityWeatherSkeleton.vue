@@ -6,21 +6,21 @@ import 'skeleton-elements/css'
 <template>
   <div class="weather">
     <div class="weather__current">
-      <SkeletonBlock effect="wave" class="weather__title"></SkeletonBlock>
-      <SkeletonBlock effect="wave" class="weather__temp"></SkeletonBlock>
-      <SkeletonBlock effect="wave" class="weather__description"></SkeletonBlock>
+      <SkeletonBlock effect="wave" class="weather__title" />
+      <SkeletonBlock effect="wave" class="weather__temp" />
+      <SkeletonBlock effect="wave" class="weather__description" />
       <SkeletonBlock effect="wave" class="weather__graph" />
     </div>
-    <SkeletonBlock effect="wave" class="weather__title-2"></SkeletonBlock>
+    <SkeletonBlock effect="wave" class="weather__title-2" />
     <div class="weather__daily">
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
-      <SkeletonBlock class="weather__daily-block" effect="wave"></SkeletonBlock>
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
+      <SkeletonBlock class="weather__daily-block" effect="wave" />
     </div>
   </div>
 </template>
@@ -37,14 +37,14 @@ import 'skeleton-elements/css'
     align-items: center;
   }
   &__title {
-    width: 30em;
+    max-width: 30em;
     height: 3em;
     margin: 0 auto 1em;
     box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.1);
     border-radius: 20px;
   }
   &__title-2 {
-    width: 13em;
+    max-width: 13em;
     height: 2em;
     margin: 0 auto 2em;
     box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.1);
@@ -52,14 +52,14 @@ import 'skeleton-elements/css'
   }
   &__temp {
     border-radius: 20px;
-    width: 6em;
+    max-width: 6em;
     height: 8em;
     border-radius: 20px;
     box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.1);
     margin: 0 0 1em 0;
   }
   &__description {
-    width: 15em;
+    max-width: 15em;
     height: 4em;
     margin: 0 auto 1em;
     box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.1);

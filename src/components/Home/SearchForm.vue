@@ -1,9 +1,16 @@
 <script setup>
+import { computedAsync, useDebounce } from '@vueuse/core'
 import { ref } from 'vue'
 import { useGeocoding } from '@/composables/useGeocoding'
+
 import SearchResult from '@/components/Home/SearchResult.vue'
+
 const searchQuery = ref('')
-const geocoding = useGeocoding(searchQuery, 300)
+const searchQueryDebounced = useDebounce(searchQuery, 300)
+const geocoding = computedAsync(async () => {
+  const { fetchResults } = useGeocoding()
+  return await fetchResults(searchQueryDebounced.value)
+})
 </script>
 
 <template>

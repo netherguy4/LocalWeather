@@ -1,4 +1,8 @@
-import './assets/nullstyle.css'
+import '@/assets/nullstyle.css'
+import '@/assets/base.scss'
+import '@/assets/utils.scss'
+import '@/assets/vendors/animate-css.scss'
+import '@/assets/vendors/vue-toastifications.scss'
 import 'vue-toastification/dist/index.css'
 
 import { createApp } from 'vue'

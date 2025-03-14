@@ -1,25 +1,15 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { useAddedCities } from '@/stores/addedCities'
-import { useAnimation } from '@/stores/animation'
-import { useToast } from 'vue-toastification'
+import { useRoute } from 'vue-router'
 
+import HeaderButtons from './HeaderButtons.vue'
 import InfoModal from './InfoModal.vue'
 
 import logo from '@/assets/svg/sun-svgrepo-com.svg'
-import info from '@/assets/svg/info.svg'
-import plus from '@/assets/svg/plus-svgrepo-com.svg'
 
-const toast = useToast()
-const route = useRoute()
-const clickHandler = () => {
-  useAddedCities().addCity(route.params.city, route.query.lat, route.query.lon, route.query.index)
-  useAnimation().hideButton()
-  toast.success('Added city to tracking list', {
-    timeout: 1500,
-    toastClassName: 'my-toast',
-  })
-}
+const showModal = ref(false)
+const toggleModal = () => (showModal.value = !showModal.value)
 </script>
 
 <template>
@@ -29,16 +19,12 @@ const clickHandler = () => {
         <Component :is="logo" class="header__logo" />
         <span class="header__logo-text">The Local Weather</span>
       </router-link>
-      <div class="header__buttons">
-        <button class="header__button" id="infoButton" @click="useAnimation().openModal()">
-          <Component :is="info" class="header__button-image" />
-        </button>
-        <button class="header__button" id="addButton" @click="clickHandler">
-          <Component :is="plus" class="header__button-image" />
-        </button>
-      </div>
+      <HeaderButtons
+        :showAddButton="!useAddedCities().isAdded && useRoute().name === 'weather'"
+        @on-click-info="toggleModal"
+      />
     </div>
-    <info-modal>
+    <info-modal :active="showModal" @closeModal="toggleModal">
       <div>
         <h1 class="modal__title">About</h1>
         <p class="modal__text">
@@ -68,10 +54,8 @@ const clickHandler = () => {
 </template>
 
 <style lang="scss" scoped>
-@use 'sass:color';
 .header {
   font-size: toem(24);
-  // color: #fff;
   box-shadow: 0 5px 5px 0 rgba($color: #000000, $alpha: 0.05);
   &__container {
     display: flex;
@@ -94,36 +78,6 @@ const clickHandler = () => {
     font-family: 'Iansui', cursive;
     font-weight: 400;
     font-style: normal;
-  }
-  &__buttons {
-    display: flex;
-    gap: 0.2em;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  &__button {
-    font-size: 1em;
-    height: 1em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    translate: -100% -50%;
-    visibility: hidden;
-    &:first-child {
-      // translate: -250% -50%;
-      visibility: visible;
-    }
-  }
-  &__button-image {
-    height: 1em;
-    width: 1em;
-    fill: #fff;
-    transition: fill $trTime;
-    @include hover {
-      transition: fill $hoverTime;
-      fill: color.adjust($color: #6991c7, $lightness: -15%);
-    }
   }
 }
 </style>

@@ -1,0 +1,15 @@
+.container {
+  max-width: torem(1024);
+  margin: 0 auto;
+  position: relative;
+}
+.router-enter-leave {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  translate: -50%;
+}
+.weather-enter-leave {
+  position: absolute;
+  width: calc(100% - 3em);
+}

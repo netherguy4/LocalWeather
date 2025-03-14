@@ -1,5 +1,5 @@
 <script setup>
-import { getWeather } from '@/composables/getWeather'
+import { useWeather } from '@/composables/useWeather'
 import AsyncImage from '../AsyncImage.vue'
 
 const props = defineProps({
@@ -8,7 +8,7 @@ const props = defineProps({
   lon: String,
 })
 
-const weather = getWeather(props.lat, props.lon)
+const weather = useWeather(props.lat, props.lon)
 const data = await weather()
 await new Promise((resolve) => {
   setTimeout(resolve, 300)

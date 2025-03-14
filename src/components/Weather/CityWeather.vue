@@ -1,8 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import gsap from 'gsap'
-import { onMounted } from 'vue'
-import { getWeather } from '@/composables/getWeather'
+import { useWeather } from '@/composables/useWeather'
 import { useAddedCities } from '@/stores/addedCities'
 import { useToast } from 'vue-toastification'
 
@@ -16,7 +14,7 @@ import trashCan from '@/assets/svg/trash.svg'
 const toast = useToast()
 const route = useRoute()
 const router = useRouter()
-const weather = getWeather(route.query.lat, route.query.lon)
+const weather = useWeather(route.query.lat, route.query.lon)
 const data = await weather()
 await new Promise((resolve) => {
   setTimeout(resolve, 300)
@@ -44,9 +42,6 @@ const labels = data.hourly.slice(0, 8).map((hour) => {
 })
 let dataset = data.hourly.slice(0, 8).map((hour) => {
   return Math.round(hour.temp)
-})
-onMounted(() => {
-  gsap.fromTo('.weather', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 })
 })
 </script>
 
@@ -91,17 +86,22 @@ onMounted(() => {
     </div>
     <h2 class="weather__title">8-day forecast</h2>
     <DailyWeather class="weather__daily" :weather="data.daily" />
-    <button v-if="useAddedCities().isAdded" @click="clickHandler" class="weather__button">
+    <a
+      href=""
+      target="_top"
+      v-if="useAddedCities().isAdded"
+      @click="clickHandler"
+      class="weather__button"
+    >
       <Component class="weather__button-image" :is="trashCan" />
       Remove city
-    </button>
+    </a>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .weather {
   text-align: center;
-  visibility: hidden;
   &__current {
     display: flex;
     flex-direction: column;
@@ -151,7 +151,7 @@ onMounted(() => {
     font-size: 1.2em;
     margin: 0 auto 0;
     padding: 0.5em;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.3em;
     &-image {
