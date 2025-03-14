@@ -48,7 +48,7 @@ const toggleModal = () => (showModal.value = !showModal.value)
         <h2 class="modal__subtitle">Removing a city</h2>
         <p class="modal__text">
           If you no longer wish to track a city, simply select the city within the home page. At the
-          bottom of the page, there will be am option to delete the city.
+          bottom of the page, there will be an option to delete the city.
         </p>
       </div>
     </info-modal>
