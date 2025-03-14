@@ -9,7 +9,7 @@ const searchQuery = ref('')
 const searchQueryDebounced = useDebounce(searchQuery, 300)
 const geocoding = computedAsync(async () => {
   const { fetchResults } = useGeocoding()
-  return await fetchResults(searchQueryDebounced.value)
+  return await fetchResults(searchQueryDebounced)
 })
 </script>
 

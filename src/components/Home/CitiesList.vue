@@ -1,7 +1,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAddedCities } from '@/stores/addedCities'
+import { useAddedCities } from '@/stores/useAddedCities'
 import { SkeletonBlock } from 'skeleton-elements/vue'
 import 'skeleton-elements/css'
 

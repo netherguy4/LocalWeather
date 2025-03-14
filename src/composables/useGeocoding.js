@@ -1,7 +1,9 @@
 import axios from '/services/geocoding'
+import { unref } from 'vue'
 
 export function useGeocoding() {
   function fetchResults(query) {
+    query = unref(query)
     if (query === '') {
       return 0
     } else {

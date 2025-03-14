@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { useWeather } from '@/composables/useWeather'
-import { useAddedCities } from '@/stores/addedCities'
+import { useWeather } from '@/stores/useWeather'
+import { useAddedCities } from '@/stores/useAddedCities'
 import { useToast } from 'vue-toastification'
 
 import WeatherGraph from './WeatherGraph.vue'
@@ -14,15 +14,16 @@ import trashCan from '@/assets/svg/trash.svg'
 const toast = useToast()
 const route = useRoute()
 const router = useRouter()
-const weather = useWeather(route.query.lat, route.query.lon)
-const data = await weather()
+const weather = useWeather()
+const cities = useAddedCities()
+const data = await weather.getWeather(route.query.lat, route.query.lon)
 await new Promise((resolve) => {
   setTimeout(resolve, 300)
 })
 const clickHandler = () => {
   router.push('/')
   toast.success('Removed city from tracking list', { timeout: 1500, toastClassName: 'my-toast' })
-  useAddedCities().removeCity(route.query.index)
+  cities.removeCity(route.query.index)
 }
 
 const timeNow = new Date(Date.now())
@@ -86,16 +87,10 @@ let dataset = data.hourly.slice(0, 8).map((hour) => {
     </div>
     <h2 class="weather__title">8-day forecast</h2>
     <DailyWeather class="weather__daily" :weather="data.daily" />
-    <a
-      href=""
-      target="_top"
-      v-if="useAddedCities().isAdded"
-      @click="clickHandler"
-      class="weather__button"
-    >
+    <button v-if="cities.isAdded" @click="clickHandler" class="weather__button">
       <Component class="weather__button-image" :is="trashCan" />
       Remove city
-    </a>
+    </button>
   </div>
 </template>
 

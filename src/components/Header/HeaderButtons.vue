@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import { useAddedCities } from '@/stores/addedCities'
+import { useAddedCities } from '@/stores/useAddedCities'
 
 import info from '@/assets/svg/info.svg'
 import plus from '@/assets/svg/plus-svgrepo-com.svg'
@@ -56,7 +56,7 @@ const onClickAdd = () => {
 }
 .buttons {
   display: flex;
-  gap: 0.2em;
+  gap: 0.35em;
   align-items: center;
   justify-content: center;
   position: relative;

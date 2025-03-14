@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useAddedCities } from '@/stores/addedCities'
+import { useAddedCities } from '@/stores/useAddedCities'
 import { useRoute } from 'vue-router'
 
 import HeaderButtons from './HeaderButtons.vue'
@@ -8,6 +8,8 @@ import InfoModal from './InfoModal.vue'
 
 import logo from '@/assets/svg/sun-svgrepo-com.svg'
 
+const route = useRoute()
+const addedCities = useAddedCities()
 const showModal = ref(false)
 const toggleModal = () => (showModal.value = !showModal.value)
 </script>
@@ -20,7 +22,7 @@ const toggleModal = () => (showModal.value = !showModal.value)
         <span class="header__logo-text">The Local Weather</span>
       </router-link>
       <HeaderButtons
-        :showAddButton="!useAddedCities().isAdded && useRoute().name === 'weather'"
+        :showAddButton="!addedCities.isAdded && route.name === 'weather'"
         @on-click-info="toggleModal"
       />
     </div>
