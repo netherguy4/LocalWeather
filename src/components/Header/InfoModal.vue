@@ -99,6 +99,8 @@ const closeModal = (el, done) => {
   position: fixed;
   top: 0;
   left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   width: 100%;
   background: rgba($color: #000000, $alpha: 0.05);
@@ -108,7 +110,7 @@ const closeModal = (el, done) => {
     max-width: $M;
     position: relative;
     top: 10%;
-    margin: 0 auto;
+    margin: 0 auto 10%;
     padding: 1.5em;
   }
   &__content {
